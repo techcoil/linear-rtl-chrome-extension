@@ -1,4 +1,4 @@
-# Linear RTL Chrome Extension
+# Linear RTL Support Chrome Extension
 
 Adds RTL (Right-To-Left) support for Linear.app fields (Hebrew/Arabic) by applying custom CSS to relevant fields on `https://linear.app/`, so input, and text direction follows detected language.
 This extension doesn't change the layout of the app!
