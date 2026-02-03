@@ -1,0 +1,8 @@
+:is([contenteditable], .editor) .text-node {
+    unicode-bidi: plaintext;
+    text-align: start;
+}
+
+[data-list-container=true] span {
+    unicode-bidi: plaintext;
+}

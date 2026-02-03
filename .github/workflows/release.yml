@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Package extension
+        run: zip -r ../extension.zip .
+        working-directory: extension
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: extension.zip
+
+      - name: Upload to Chrome Web Store
+        run: >-
+          npx chrome-webstore-upload-cli upload
+          --source extension.zip
+          --extension-id "$EXTENSION_ID"
+          --client-id "$CLIENT_ID"
+          --client-secret "$CLIENT_SECRET"
+          --refresh-token "$REFRESH_TOKEN"
+        env:
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ vars.CWS_EXTENSION_ID }}
+
+      - name: Publish to Chrome Web Store
+        run: >-
+          npx chrome-webstore-upload-cli publish
+          --extension-id "$EXTENSION_ID"
+          --client-id "$CLIENT_ID"
+          --client-secret "$CLIENT_SECRET"
+          --refresh-token "$REFRESH_TOKEN"
+        env:
+          CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
+          EXTENSION_ID: ${{ vars.CWS_EXTENSION_ID }}
