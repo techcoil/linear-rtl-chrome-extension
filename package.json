@@ -1,0 +1,11 @@
+{
+  "name": "linear-rtl-chrome-extension",
+  "version": "0.1.0",
+  "scripts": {
+    "package": "cd extension && zip -r ../linear-rtl-chrome-extension.zip ."
+  },
+  "keywords": ["chrome-extension", "linear", "rtl", "hebrew", "arabic"],
+  "author": "Tech Digital Powerhouse <support@tech.co.il>",
+  "license": "MIT",
+  "description": ""
+}
