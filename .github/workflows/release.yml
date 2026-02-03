@@ -15,18 +15,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Package extension
-        run: zip -r ../extension.zip .
+        run: zip -r ../linear-rtl-chrome-extension.zip .
         working-directory: extension
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
-          files: extension.zip
+          files: linear-rtl-chrome-extension.zip
 
       - name: Upload to Chrome Web Store
         run: >-
           npx chrome-webstore-upload-cli upload
-          --source extension.zip
+          --source linear-rtl-chrome-extension.zip
           --extension-id "$EXTENSION_ID"
           --client-id "$CLIENT_ID"
           --client-secret "$CLIENT_SECRET"
