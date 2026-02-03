@@ -1,0 +1,35 @@
+name: Deploy Privacy Policy to gh-pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - privacy/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node (required by some pages actions)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Build Pages directory
+        run: |
+          mkdir -p ./public
+          cp -r privacy/* ./public/
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v6
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          user_name: github-actions
+          user_email: github-actions@github.com
